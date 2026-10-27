@@ -1,168 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="LAVANDA: comedia en vivo, stand-up, shows y fechas. Una banda de comediantes haciendo ruido.">
-  <title>LAVANDA | Comedia en vivo</title>
-  <style>
-    :root{
-      --bg:#100b18; --panel:#1b1128; --pink:#ff4fbd; --purple:#a77bff;
-      --cream:#fff4e9; --muted:#c7b9d2; --line:rgba(255,255,255,.14);
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;background:var(--bg);color:var(--cream);font-family:Arial,Helvetica,sans-serif;line-height:1.5}
-    a{color:inherit;text-decoration:none}
-    .wrap{width:min(1120px,92%);margin:auto}
-    header{position:sticky;top:0;z-index:10;background:rgba(16,11,24,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-    .nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-    .logo{font-weight:1000;letter-spacing:.12em;font-size:1.45rem}
-    .logo span{color:var(--pink)}
-    nav{display:flex;gap:22px;align-items:center;font-size:.92rem;color:var(--muted)}
-    nav a:hover{color:var(--pink)}
-    .pill{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border-radius:999px;background:var(--pink);color:#190b1b;font-weight:800;border:0}
-    .pill:hover{transform:translateY(-2px);filter:brightness(1.08)}
-    .hero{position:relative;overflow:hidden;padding:90px 0 82px;background:radial-gradient(ellipse at 80% 18%,rgba(167,123,255,.24),transparent 34%),radial-gradient(ellipse at 20% 65%,rgba(255,79,189,.17),transparent 36%)}
-    .hero:after{content:"";position:absolute;width:340px;height:340px;border:1px solid rgba(255,79,189,.35);border-radius:50%;right:-130px;bottom:-190px;box-shadow:0 0 0 35px rgba(167,123,255,.04),0 0 0 75px rgba(255,79,189,.03)}
-    .eyebrow{color:var(--pink);font-weight:900;text-transform:uppercase;letter-spacing:.18em;font-size:.78rem}
-    h1{font-size:clamp(3.5rem,10vw,8.5rem);line-height:.83;letter-spacing:-.075em;margin:22px 0 24px;font-weight:1000}
-    h1 .outline{color:transparent;-webkit-text-stroke:2px var(--cream)}
-    .hero p{max-width:580px;font-size:1.15rem;color:var(--muted)}
-    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-    .secondary{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border:1px solid var(--line);border-radius:999px;font-weight:700}
-    .secondary:hover{border-color:var(--purple);color:var(--purple)}
-    .sticker{position:absolute;right:9%;top:22%;width:145px;height:145px;border-radius:50%;display:grid;place-items:center;text-align:center;background:var(--purple);color:#160d20;font-weight:1000;transform:rotate(12deg);font-size:1.05rem;line-height:1.1;box-shadow:7px 7px 0 var(--pink)}
-    section{padding:76px 0}
-    .section-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:28px}
-    h2{font-size:clamp(2rem,5vw,3.7rem);line-height:.95;letter-spacing:-.05em;margin:10px 0}
-    .section-head p{max-width:420px;color:var(--muted);margin:0}
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .card{background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.015));border:1px solid var(--line);border-radius:20px;padding:24px;min-height:210px}
-    .card .number{font-size:.78rem;color:var(--pink);font-weight:900;letter-spacing:.12em}
-    .card h3{font-size:1.45rem;margin:18px 0 8px}
-    .card p{color:var(--muted);margin:0}
-    .dates{background:var(--cream);color:#1b1024}
-    .dates .eyebrow{color:#a51d78}
-    .dates .section-head p{color:#62546a}
-    .date-row{display:grid;grid-template-columns:100px 1fr auto;align-items:center;gap:20px;padding:20px 0;border-top:1px solid rgba(27,16,36,.18)}
-    .date-box{font-weight:1000;font-size:1.1rem;color:#a51d78}
-    .date-row h3{margin:0;font-size:1.2rem}
-    .date-row p{margin:3px 0 0;color:#62546a}
-    .date-row .secondary{border-color:rgba(27,16,36,.3)}
-    .date-row .secondary:hover{border-color:#a51d78;color:#a51d78}
-    .people{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
-    .person{padding:18px 14px;border-radius:16px;border:1px solid var(--line);background:var(--panel);min-height:140px;display:flex;flex-direction:column;justify-content:space-between}
-    .person strong{font-size:1.15rem}
-    .person span{font-size:.82rem;color:var(--muted)}
-    .cta{padding:42px;border-radius:26px;background:linear-gradient(120deg,var(--pink),var(--purple));color:#180d21;display:flex;align-items:center;justify-content:space-between;gap:24px}
-    .cta h2{margin:0}
-    .cta p{max-width:500px;margin:12px 0 0}
-    .cta .pill{background:#180d21;color:var(--cream);white-space:nowrap}
-    footer{padding:28px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
-    .footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-    @media(max-width:760px){
-      nav{gap:12px;font-size:.8rem} nav a:not(.pill){display:none}
-      .hero{padding:70px 0 64px}.sticker{width:90px;height:90px;font-size:.7rem;right:5%;top:12%}
-      .cards{grid-template-columns:1fr}.section-head{display:block}.section-head p{margin-top:12px}
-      .people{grid-template-columns:repeat(2,1fr)}.date-row{grid-template-columns:72px 1fr;gap:12px}.date-row .secondary{grid-column:2;justify-self:start}
-      .cta{padding:28px;display:block}.cta .pill{margin-top:20px}
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="wrap nav">
-      <a class="logo" href="#inicio">LA<span>V</span>ANDA</a>
-      <nav aria-label="Navegación principal">
-        <a href="#shows">Shows</a>
-        <a href="#equipo">La banda</a>
-        <a href="#contacto">Contacto</a>
-        <a class="pill" href="#fechas">Ver fechas</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero" id="inicio">
-      <div class="wrap">
-        <div class="eyebrow">Comedia en vivo · Chile</div>
-        <h1>NO SOMOS<br><span class="outline">UNA FLOR.</span><br>SOMOS LA BANDA.</h1>
-        <p>Stand-up, ideas cuestionables y gente diciendo en voz alta lo que normalmente se queda en el grupo de WhatsApp. Somos LAVANDA: comedia en vivo hecha para compartir la risa y el caos.</p>
-        <div class="hero-actions">
-          <a class="pill" href="#fechas">Encuentra tu próximo show ↗</a>
-          <a class="secondary" href="#equipo">Conoce al equipo</a>
-        </div>
-      </div>
-      <div class="sticker">RÍETE<br>CON<br>RESPONSABILIDAD*</div>
-    </section>
-
-    <section id="shows">
-      <div class="wrap">
-        <div class="section-head">
-          <div><div class="eyebrow">Lo que hacemos</div><h2>UNA BANDA.<br>VARIAS FORMAS DE HACER REÍR.</h2></div>
-          <p>Shows propios, fechas en gira y formatos especiales. El plan es simple: escenario, micrófono y una cantidad razonable de problemas convertidos en chistes.</p>
-        </div>
-        <div class="cards">
-          <article class="card"><div class="number">01 / SHOWS</div><h3>La Banda en vivo</h3><p>Una noche de stand-up con distintas voces, estilos y puntos de vista. Cada función es distinta, por suerte para todos.</p></article>
-          <article class="card"><div class="number">02 / DUPLAS</div><h3>Niko Belmar + Emma</h3><p>Dos comediantes, una dinámica propia y material que sigue creciendo función a función.</p></article>
-          <article class="card"><div class="number">03 / EVENTOS</div><h3>Comedia a medida</h3><p>Shows y colaboraciones para espacios culturales, bares, festivales y eventos privados.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="dates" id="fechas">
-      <div class="wrap">
-        <div class="section-head">
-          <div><div class="eyebrow">Agenda</div><h2>¿DÓNDE NOS VEMOS?</h2></div>
-          <p>Las próximas fechas se publicarán aquí. Mientras tanto, revisa nuestras redes o escríbenos para consultar por shows y entradas.</p>
-        </div>
-        <div class="date-row">
-          <div class="date-box">PRONTO</div>
-          <div><h3>Nuevas fechas en preparación</h3><p>Estamos armando la próxima ronda de shows.</p></div>
-          <a class="secondary" href="#contacto">Consultar ↗</a>
-        </div>
-        <div class="date-row">
-          <div class="date-box">GIRA</div>
-          <div><h3>Lavanda sale de gira</h3><p>Ciudades, escenarios y más oportunidades de hacer el ridículo profesionalmente.</p></div>
-          <a class="secondary" href="#contacto">Llevarnos a tu ciudad ↗</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="equipo">
-      <div class="wrap">
-        <div class="section-head">
-          <div><div class="eyebrow">Las personas detrás del ruido</div><h2>CONOCE A LA BANDA.</h2></div>
-          <p>Un equipo con voces distintas y una misión compartida: hacer comedia y construir escenarios donde quepan más historias.</p>
-        </div>
-        <div class="people">
-          <div class="person"><strong>Atreyu</strong><span>Comediante</span></div>
-          <div class="person"><strong>Niko Nikita</strong><span>Comediante</span></div>
-          <div class="person"><strong>Javier Saldes</strong><span>Comediante</span></div>
-          <div class="person"><strong>Flor de Loto</strong><span>Comediante · Producción</span></div>
-          <div class="person"><strong>Niko Belmar</strong><span>Comediante</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contacto">
-      <div class="wrap">
-        <div class="cta">
-          <div><h2>¿ARMAMOS ALGO?</h2><p>Contrataciones, colaboraciones, fechas y consultas generales. Escríbenos y conversemos.</p></div>
-          <a class="pill" href="https://wa.me/" target="_blank" rel="noopener">Contactar por WhatsApp ↗</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="wrap footer-inner">
-      <div><strong>LAVANDA</strong> · Comedia en vivo</div>
-      <div>Instagram · TikTok · Patreon <span style="opacity:.65">| Enlaces por configurar</span></div>
-      <div>© <span id="year"></span> LAVANDA</div>
-    </div>
-  </footer>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LAVANDA | Comedia en Vivo</title>
+    <meta name="description" content="LAVANDA: comedia en vivo, stand-up, shows y fechas. Una banda de comediantes haciendo ruido en Chile." />
+    <meta property="og:title" content="LAVANDA | Comedia en Vivo" />
+    <meta property="og:description" content="No somos una flor, somos la banda. Stand-up comedy, cartelera de fechas y contrataciones." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <script type="module" crossorigin src="/assets/index-UbLoMz9x.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-C4z3yo-H.css">
+  </head>
+  <body class="bg-[#100b18] text-[#fff4e9] antialiased selection:bg-[#ff4fbd] selection:text-[#100b18]">
+    <div id="root"></div>
+  </body>
 </html>
